@@ -19,7 +19,7 @@
                             {
                                 echo "<button type = 'button' class='btn btn-outline-primary'><i class = 'fas fw fa-shopping-cart'></i> Booking&nbsp;&nbsp 0</button>";
                             } else {
-                                echo "<a class='btn btn-outline-primary fas fw fa-shopping-cart' href='" . base_url('booking/tambahBooking/' . $buku->id) . "'><i class =  'fas fw fa-shopping-cart'></i> Booking</a>";
+                                echo "<a class='btn btn-outline-primary fas fw fa-shopping-cart ' href='" . base_url('booking/tambahBooking/' . $buku->id) . "'><i class =  'fas fw fa-shopping-cart'></i> Booking</a>";
                             }
                             ?>
                             <a class="btn-outline-warning fas fw fa-search" href="<?= base_url('home/detailBuku/' . $buku->id); ?>"> Detail</a></p>
