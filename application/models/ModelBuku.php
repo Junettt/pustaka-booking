@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
 class ModelBuku extends CI_Model
 {
     //manajemen buku
@@ -38,7 +37,7 @@ class ModelBuku extends CI_Model
         $this->db->from('buku');
         return $this->db->get()->row($field);
     }
-    
+ 
     //manajemen kategori
     public function getKategori()
     {
@@ -66,20 +65,28 @@ class ModelBuku extends CI_Model
     }
 
     //join
-    
     public function joinKategoriBuku($where)
     {
-        $this->db->select('*');
+        //$this->db->select('buku.id_kategori,kategori.kategori');
+        $this->db->select('buku.*,kategori.kategori');
         $this->db->from('buku');
         $this->db->join('kategori','kategori.id = buku.id_kategori');
         $this->db->where($where);
         return $this->db->get();
     }
     
-    public function getLimitBuku()
-    {
-        $this->db->limit(5);
-        return $this->db->get('buku');
-    }
+    //public function getLimitBuku()
+    //{
+        //$this->db->limit(5);
+       // return $this->db->get('buku');
+    //}
 
+    public function getULimitBuku()
+    {
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->where('stok <', '3');
+        $this->db->limit(10, 0);
+        return $this->db->get();
+    }
 }

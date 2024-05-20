@@ -1,8 +1,9 @@
-<?php if (!defined('BASEPATH')) exit('No Direct Script Access Allowed');
+<?php
+if (!defined('BASEPATH')) exit('No Direct Script Access Allowed');
 
 class ModelPinjam extends CI_Model
 {
-    // Manipulasi table pinjam
+    // Manipulasi tabel pinjam
     public function simpanPinjam($data)
     {
         $this->db->insert('pinjam', $data);
@@ -32,10 +33,11 @@ class ModelPinjam extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    // Manipulasi tabel detail pinjam
+    // Manipulasi tabel detail_pinjam
     public function simpanDetail($idbooking, $nopinjam)
     {
         $sql = "INSERT INTO detail_pinjam (no_pinjam,id_buku) SELECT pinjam.no_pinjam,booking_detail.id_buku FROM pinjam, booking_detail WHERE booking_detail.id_booking=$idbooking AND pinjam.no_pinjam='$nopinjam'";
         $this->db->query($sql);
     }
 }
+?>

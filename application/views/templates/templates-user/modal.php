@@ -31,7 +31,7 @@
         </div>
     </div>
 </div>
-<!--/ Login Modal -->
+<!-- End of Login Modal -->
 
 <!-- Daftar Modal -->
 <div class="modal fade" tabindex="-1" id="daftarModal" role="dialog">
@@ -69,7 +69,7 @@
         </div>
     </div>
 </div>
-<!--/ Daftar Modal -->
+<!-- End of Daftar Modal -->
 
 <!-- Modal Informasi -->
 <div class="modal fade" tabindex="-1" id="modalinfo" role="dialog">
@@ -90,5 +90,4 @@
         </div>
     </div>
 </div>
-<!--/ Modal Informasi -->
-
+<!-- End of Modal Informasi -->

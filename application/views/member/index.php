@@ -14,7 +14,11 @@
                 <div class="card-body">
                     <h5 class="card-title"><?= $user; ?></h5>
                     <p class="card-text"><?= $email; ?></p>
-                    <p class="card-text"><small class="text-muted">Jadi member sejak: <br><b><?= date('d F Y', $tanggal_input); ?></b></small></p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            Jadi member sejak: <br><b><?= date('d F Y', $tanggal_input); ?></b>
+                        </small>
+                    </p>
                 </div>
                 <div class="btn btn-info ml-3 my-3">
                     <a href="<?= base_url('member/ubahprofil'); ?>" class="text text-white"><i class="fas fa-user-edit"></i> Ubah Profil</a>
@@ -24,5 +28,4 @@
     </div>
 </div>
 <!-- /.container-fluid -->
-</div>
 <!-- End of Main Content -->

@@ -24,15 +24,14 @@
             <tr>
                 <td colspan="3">
                     <div class="table-responsive full-width">
-                        <table class="table table-bordered table-striped tablehover" id="table-datatable">
-                            
+                        <table class="table table-bordered table-striped table-hover" id="table-datatable">
                             <tr>
-                                    <th>No.</th>
-                                    <th>ID Buku</th>
-                                    <th>Judul Buku</th>
-                                    <th>Pengarang</th>
-                                    <th>Penerbit</th>
-                                    <th>Tahun</th>
+                                <th>No.</th>
+                                <th>ID Buku</th>
+                                <th>Judul Buku</th>
+                                <th>Pengarang</th>
+                                <th>Penerbit</th>
+                                <th>Tahun</th>
                             </tr>
                             <?php
                             $no = 1;
@@ -53,7 +52,11 @@
                 </td>
             </tr>
             <tr>
-                <td align="center" colspan="3"><a href="#" onclick="window.history.go(-1)" class="btn btn-outline-dark"><i class="fas fa-fw fareply"></i> Kembali</a></td>
+                <td align="center" colspan="3">
+                    <a href="#" onclick="window.history.go(-1)" class="btn btn-outline-dark">
+                        <i class="fas fa-fw fa-reply"></i> Kembali
+                    </a>
+                </td>
             </tr>
         </table>
     </center>

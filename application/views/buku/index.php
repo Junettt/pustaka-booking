@@ -10,11 +10,12 @@
                 </div>
             <?php }?>
             <?= $this->session->flashdata('pesan'); ?>
-            <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#bukuBaruModal"><i class="fas fa-file-alt"></i> Buku Baru</a>
-            <table class="table table-hover">
+            <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#bukuBaruModal"><i 
+            class="fas fa-file-alt"></i> Buku Baru</a>
+            <table  id="datatableid" class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">No</th>
                         <th scope="col">Judul</th>
                         <th scope="col">Pengarang</th>
                         <th scope="col">Penerbit</th>
@@ -45,11 +46,16 @@
                         <td>
                             <picture>
                                 <source srcset="" type="image/svg+xml">
-                                <img src="<?= base_url('assets/img/upload/') . $b['image'];?>" class="img-fluid img-thumbnail" alt="...">
-                            </picture></td>
+                                <img src="<?= base_url('assets/img/upload/') . $b['image'];?>" width="70px"  
+                                class="img-fluid img-thumbnail " alt="...">
+                            </picture>
+                        </td>
                         <td>
-                            <a href="<?= base_url('buku/ubahBuku/').$b['id'];?>" class="badge badge-info"><i class="fas fa-edit"></i> Ubah</a>
-                            <a href="<?= base_url('buku/hapusbuku/').$b['id'];?>" onclick="return confirm('Kamu yakin akan menghapus <?= $judul.' '.$b['judul_buku'];?> ?');" class="badge badge-danger"><i class="fas fa-trash"></i> Hapus</a>
+                            <a href="<?= base_url('buku/ubahBuku/').$b['id'];?>" class="badge badge-info">
+                            <i class="fas fa-edit"></i> Ubah</a>
+                            <a href="<?= base_url('buku/hapusbuku/').$b['id'];?>" onclick="return confirm('Kamu 
+                            yakin akan menghapus <?= $judul.' '.$b['judul_buku'];?> ?');" class="badge badge-danger">
+                            <i class="fas fa-trash"></i> Hapus</a>
                         </td>
                     </tr>
                     <?php } ?>
@@ -77,7 +83,8 @@
             <form action="<?= base_url('buku'); ?>" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control form-control-user" id="judul_buku" name="judul_buku" placeholder="Masukkan Judul Buku">
+                        <input type="text" class="form-control form-control-user" id="judul_buku" 
+                        name="judul_buku" placeholder="Masukkan Judul Buku">
                     </div>
                     <div class="form-group">
                         <select name="id_kategori" class="form-control form-control-user">
@@ -89,10 +96,12 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control form-control-user" id="pengarang" name="pengarang" placeholder="Masukkan nama pengarang">
+                        <input type="text" class="form-control form-control-user" id="pengarang" name="pengarang" 
+                        placeholder="Masukkan nama pengarang">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control form-control-user" id="penerbit" name="penerbit" placeholder="Masukkan nama penerbit">
+                        <input type="text" class="form-control form-control-user" id="penerbit" name="penerbit" 
+                        placeholder="Masukkan nama penerbit">
                     </div>
                     <div class="form-group">
                         <select name="tahun" class="form-control form-control-user">
@@ -104,17 +113,20 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control form-control-user" id="isbn" name="isbn" placeholder="Masukkan ISBN">
+                        <input type="text" class="form-control form-control-user" id="isbn" name="isbn" 
+                        placeholder="Masukkan ISBN">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control form-control-user" id="stok" name="stok" placeholder="Masukkan nominal stok">
+                        <input type="text" class="form-control form-control-user" id="stok" name="stok" 
+                        placeholder="Masukkan nominal stok">
                     </div>
                     <div class="form-group">
                         <input type="file" class="form-control form-control-user" id="image" name="image">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-ban"></i> Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fas fa-ban"></i> Close</button>
                     <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Tambah</button>
                 </div>
             </form>

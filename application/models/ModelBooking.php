@@ -26,7 +26,7 @@ class ModelBooking extends CI_Model
         $this->db->select('*');
         $this->db->from('booking bo');
         $this->db->join('booking_detail d', 'd.id_booking=bo.id_booking');
-        $this->db->join('buku bu', 'bu.id=d.id_buku');
+        $this->db->join('buku bu ', 'bu.id=d.id_buku');
         $this->db->where($where);
         return $this->db->get();
     }
@@ -55,6 +55,7 @@ class ModelBooking extends CI_Model
 
     public function find($where)
     {
+        //Query mencari record berdasarkan ID-nya
         $this->db->limit(1);
         return $this->db->get('buku', $where);
     }
@@ -100,3 +101,4 @@ class ModelBooking extends CI_Model
         return $kodejadi;
     }
 }
+?>

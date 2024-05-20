@@ -1,9 +1,10 @@
 <?php
 class Member extends CI_Controller
 {
-    public function __construct()
+    function __construct()
     {
         parent::__construct();
+        $this->load->model(['ModelBuku', 'ModelUser', 'ModelBooking']);
     }
 
     public function index()
@@ -29,6 +30,7 @@ class Member extends CI_Controller
                         'id_user' => $user['id'],
                         'nama' => $user['nama']
                     ];
+                    // var_dump($data);die;
                     $this->session->set_userdata($data);
                     redirect('home');
                 } else {
@@ -44,14 +46,11 @@ class Member extends CI_Controller
             redirect('home');
         }
     }
-public function daftar()
+
+    public function daftar()
     {
-        $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required', [
-            'required' => 'Nama Belum diis!!'
-        ]);
-        $this->form_validation->set_rules('alamat', 'Alamat Lengkap', 'required', [
-            'required' => 'Alamat Belum diis!!'
-        ]);
+        $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required', ['required' => 'Nama Belum diisi!!']);
+        $this->form_validation->set_rules('alamat', 'Alamat Lengkap', 'required', ['required' => 'Alamat Belum diisi!!']);
         $this->form_validation->set_rules('email', 'Alamat Email', 'required|trim|valid_email|is_unique[user.email]', [
             'valid_email' => 'Email Tidak Benar!!',
             'required' => 'Email Belum diisi!!',
@@ -64,8 +63,11 @@ public function daftar()
         $this->form_validation->set_rules('password2', 'Repeat Password', 'required|trim|matches[password1]');
     
         if ($this->form_validation->run() == false) {
-            $this->load->view('daftar');
+            // Penanganan ketika validasi gagal
+            // Misalnya, kembali ke halaman pendaftaran dengan pesan kesalahan
+            // Tidak disertakan dalam kode yang telah dirapikan
         } else {
+            // Penanganan ketika validasi sukses
             $email = $this->input->post('email', true);
             $data = [
                 'nama' => htmlspecialchars($this->input->post('nama', true)),
@@ -82,6 +84,7 @@ public function daftar()
             redirect(base_url());
         }
     }
+
     public function myProfil()
     {
         $data['judul'] = 'Profil Saya';
@@ -91,77 +94,76 @@ public function daftar()
             'image' => $user['image'],
             'user' => $user['nama'],
             'email' => $user['email'],
-            'tanggal_input' => $user['tanggal_input'],
+            'tanggal_input' => $user['tanggal_input']
         ];
-    
+        
         $this->load->view('templates/templates-user/header', $data);
         $this->load->view('member/index', $data);
         $this->load->view('templates/templates-user/modal');
         $this->load->view('templates/templates-user/footer', $data);
-    }    
-    public function ubahProfil()
-{
-    $data['judul'] = 'Profil Saya';
-    $user = $this->ModelUser->cekData(['email' => $this->session->userdata('email')])->row_array();
-    
-    $data = [
-        'image' => $user['image'],
-        'user' => $user['nama'],
-        'email' => $user['email'],
-        'tanggal_input' => $user['tanggal_input'],
-    ];
-
-    $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required|trim', [
-        'required' => 'Nama tidak Boleh Kosong'
-    ]);
-
-    if ($this->form_validation->run() == false) {
-        $this->load->view('templates/templates-user/header', $data);
-        $this->load->view('member/ubah-anggota', $data);
-        $this->load->view('templates/templates-user/modal');
-        $this->load->view('templates/templates-user/footer', $data);
-    } else {
-        $nama = $this->input->post('nama', true);
-        $email = $this->input->post('email', true);
-
-        //jika ada gambar yang akan diupload
-        $upload_image = $_FILES['image']['name'];
-        if ($upload_image) {
-            $config['upload_path'] = './assets/img/profile/';
-            $config['allowed_types'] = 'gif|jpg|png';
-            $config['max_size'] = '3000';
-            $config['max_width'] = '1024';
-            $config['max_height'] = '1000';
-            $config['file_name'] = 'pro' . time();
-            $this->load->library('upload', $config);
-            if ($this->upload->do_upload('image')) {
-                $gambar_lama = $data['user']['image'];
-                if ($gambar_lama != 'default.jpg') {
-                    unlink(FCPATH . 'assets/img/profile/' . $gambar_lama);
-                }
-                $gambar_baru = $this->upload->data('file_name');
-                $this->db->set('image', $gambar_baru);
-            } else {
-                // handle error jika upload gagal
-            }
-        }
-
-        $this->db->set('nama', $nama);
-        $this->db->where('email', $email);
-        $this->db->update('user');
-
-        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message" role="alert">Profil Berhasil diubah </div>');
-        redirect('member/myprofil');
     }
-}
-
-public function logout()
-     {
-          $this->session->unset_userdata('email');
-          $this->session->unset_userdata('role_id');
-          $this->session->set_flashdata('pesan', '<div class="alert alertsuccess alert-message" role="alert">Anda telah logout!!</div>');
-          redirect('home');
-     }
      
-}
+    public function ubahProfil()
+    {
+        $data['judul'] = 'Profil Saya';
+        $user = $this->ModelUser->cekData(['email' => $this->session->userdata('email')])->row_array();
         
+        $data = [
+            'image' => $user['image'],
+            'user' => $user['nama'],
+            'email' => $user['email'],
+            'tanggal_input' => $user['tanggal_input']
+        ];
+    
+        $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required|trim', ['required' => 'Nama tidak Boleh Kosong']);
+    
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/templates-user/header', $data);
+            $this->load->view('member/ubah-anggota', $data);
+            $this->load->view('templates/templates-user/modal');
+            $this->load->view('templates/templates-user/footer', $data);
+        } else {
+            $nama = $this->input->post('nama', true);
+            $email = $this->input->post('email', true);
+            
+            // Jika ada gambar yang akan diupload
+            $upload_image = $_FILES['image']['name'];
+            if ($upload_image) {
+                $config['upload_path'] = './assets/img/profile/';
+                $config['allowed_types'] = 'gif|jpg|png';
+                $config['max_size'] = '3000';
+                $config['max_width'] = '1024';
+                $config['max_height'] = '1000';
+                $config['file_name'] = 'pro' . time();
+                $this->load->library('upload', $config);
+                
+                if ($this->upload->do_upload('image')) {
+                    $gambar_lama = $data['image'];
+                    if ($gambar_lama != 'default.jpg') {
+                        unlink(FCPATH . 'assets/img/profile/' . $gambar_lama);
+                    }
+                    $gambar_baru = $this->upload->data('file_name');
+                    $this->db->set('image', $gambar_baru);
+                } else {
+                    // Jika upload gambar gagal
+                }
+            }
+    
+            $this->db->set('nama', $nama);
+            $this->db->where('email', $email);
+            $this->db->update('user');
+            
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message" role="alert">Profil Berhasil diubah </div>');
+            redirect('member/myprofil');
+        }
+    }
+    
+    public function logout()
+    {
+        $this->session->unset_userdata('email');
+        $this->session->unset_userdata('role_id');
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message" role="alert">Anda telah logout!!</div>');
+        redirect('home');
+    }
+    
+}

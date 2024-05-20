@@ -24,4 +24,3 @@ function cek_user()
         redirect('home');
     }
 }
-?>
