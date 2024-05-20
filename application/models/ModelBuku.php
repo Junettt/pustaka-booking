@@ -66,7 +66,8 @@ class ModelBuku extends CI_Model
     }
 
     //join
-public function joinKategoriBuku($where)
+    
+    public function joinKategoriBuku($where)
     {
         $this->db->select('*');
         $this->db->from('buku');
@@ -74,7 +75,8 @@ public function joinKategoriBuku($where)
         $this->db->where($where);
         return $this->db->get();
     }
-public function getLimitBuku()
+    
+    public function getLimitBuku()
     {
         $this->db->limit(5);
         return $this->db->get('buku');
